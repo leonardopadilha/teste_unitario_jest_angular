@@ -31,6 +31,10 @@ Após baixar o projeto, você precisa instalar as dependências utilizando o com
 ```bash
 npm install
 ```
+Para executar os testes:
+```bash
+ng test
+```
 Depois, para executar o projeto em modo desenvolvimento:
 ```bash
 ng serve
