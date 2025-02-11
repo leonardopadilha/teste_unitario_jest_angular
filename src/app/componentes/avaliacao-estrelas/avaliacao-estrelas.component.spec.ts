@@ -48,4 +48,37 @@ describe('AvaliacaoEstrelasComponent', () => {
     component.classificar(classificacao)
     expect(ononTouchedpy).toHaveBeenCalled()
   })
+
+  it('não deve atualizar a classificação quando a propriedade readonly for true', () => {
+    const onChangeSpy = jest.spyOn(component, 'onChange')
+    component.readOnly = true
+    const classificacao = 5
+    component.classificar(classificacao)
+    expect(onChangeSpy).not.toHaveBeenCalled()
+    expect(component.classificacao).not.toEqual(classificacao)
+  })
+
+  it('deve ignorar valores inválidos e atribuir o valor 1 à classificação', () => {
+    const valoresInvalidos = [0, -6, 'abc', undefined]
+    valoresInvalidos.forEach(valorInvalido => {
+      component.writeValue(valorInvalido as any)
+      expect(component.classificacao).toBe(1)
+    })
+  })
+
+  it('deve atualizar o DOM quando a classificação muda', () => {
+    const classificacao = 3
+    component.classificar(classificacao)
+    fixture.detectChanges()
+    const estrelaPreenchida = fixture.nativeElement.querySelector('.filled')
+    expect(estrelaPreenchida).toBeTruthy()
+  })
+
+  it('deve atualizar o DOM quando a classificação muda', () => {
+    const classificacao = 0
+    component.classificar(classificacao)
+    fixture.detectChanges()
+    const estrelaPreenchida = fixture.nativeElement.querySelector('.filled')
+    expect(estrelaPreenchida).not.toBeTruthy()
+  })
 })
