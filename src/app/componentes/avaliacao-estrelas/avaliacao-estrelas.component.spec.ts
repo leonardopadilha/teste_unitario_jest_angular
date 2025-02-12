@@ -81,4 +81,18 @@ describe('AvaliacaoEstrelasComponent', () => {
     const estrelaPreenchida = fixture.nativeElement.querySelector('.filled')
     expect(estrelaPreenchida).not.toBeTruthy()
   })
+
+  it('deve inicializar com a classificação padrão de 1', () => {
+    expect(component.classificacao).toBe(1)
+  })
+
+  it('deve atualizar a classificação quando o @Input mudar', () => {
+    component.classificacao = 3
+    fixture.detectChanges()
+    expect(component.classificacao).toBe(3)
+
+    component.classificacao = 5
+    fixture.detectChanges()
+    expect(component.classificacao).toBe(5)
+  })
 })
